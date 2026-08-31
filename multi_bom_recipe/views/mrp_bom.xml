@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- list view -->
+    <record id="mrp_bom_tree_view_multi_bom" model="ir.ui.view">
+        <field name="name">mrp.bom.view.tree.inherit.multi.bom</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="sales_channel_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- form view -->
+    <record id="mrp_bom_form_view_multi_bom" model="ir.ui.view">
+        <field name="name">mrp.bom.view.form.inherit.multi.bom</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/div[1]" position="after">
+                <field name="sales_channel_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
