@@ -53,3 +53,27 @@
   - confirm POS picking explosion uses the floor-specific recipe BoM and no longer depends on the `optp_ext` quantity patch
   - confirm real-time POS pickings already carry `pos_order_id` during move creation
   - confirm POS invoice COGS matches the valuation total of the picking moves created from the actually used BoM
+
+
+## Standalone refactor (18.0.2.0.0)
+
+- Replaced externally inherited sales.config.channel with owned master.recipe.channel.line.
+- Added direct floor selection for recipes with no channel-specific extras.
+- Removed optp_ext and blink_integration dependencies; declared standard pos_restaurant and mail.
+- Added Sales Order floor/channel selection and channel-aware standard procurement, including quantity increases.
+- Matched floors by ID and excluded channel-generated BoMs from ordinary fallback lookup.
+- Replaced copied stock/procurement routines with standard-method extensions.
+- Removed project-specific refund_type, business_date, and stock/accounting SQL backdating.
+- Kept early POS picking linkage and split session-closing batches by order.
+- Added owned-model ACLs, floor-selector read access, and company record rules.
+- Targeted fresh standalone installations for Odoo Apps; no legacy project migrations are included.
+- Corrected README claims about missing branch-sync actions.
+
+### Standalone validation status
+
+- Passed in-memory Python AST parsing for all addon Python files (no bytecode or test files created).
+- Passed XML parsing, manifest data/dependency checks, XML ID and ACL model reference checks, and whitespace checks.
+- Verified runtime model source has no optp_ext, Blink, sales.config.channel, business_date, refund_type, or raw SQL references.
+- Compared overridden method signatures with official Odoo 18 source.
+- Attempted clean installation using cached odoo:18 and postgres:17 images, an isolated network namespace, a read-only addon mount, and a temporary database. Docker disconnected during startup; installation and business workflows are NOT runtime-verified.
+- Docker remained unavailable for cleanup. When Docker is available, remove only the temporary containers with: docker rm -f -v multi-bom-recipe-validation-odoo multi-bom-recipe-validation-db. No live/staging database or container configuration was changed.

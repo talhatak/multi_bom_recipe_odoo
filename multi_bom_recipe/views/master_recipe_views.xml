@@ -7,7 +7,7 @@
             <list>
                 <field name="name"/>
                 <field name="product_id"/>
-                <field name="company_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
             </list>
         </field>
     </record>
@@ -30,7 +30,8 @@
                         <group>
                             <field name="name"/>
                             <field name="product_id"/>
-                            <field name="company_id"/>
+                            <field name="recipe_channel_ids" widget="many2many_tags"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
                         </group>
                     </group>
                     <notebook>
@@ -39,17 +40,18 @@
                                 <list editable="bottom">
                                     <field name="product_id"/>
                                     <field name="product_qty" digits="[12, 4]"/>
+                                    <field name="product_uom_category_id" column_invisible="True"/>
                                     <field name="product_uom_id"/>
                                 </list>
                             </field>
                         </page>
-                        <page string="Sales Channels">
+                        <page string="Channel Components">
                             <field name="sales_channel_ids">
                                 <list editable="bottom">
                                     <field name="channel_id"/>
                                     <field name="product_id"/>
                                     <field name="product_qty" digits="[12, 4]"/>
-                                    <field name="bom_id" optional="hide"/>
+                                    <field name="product_uom_id" readonly="True"/>
                                 </list>
                             </field>
                         </page>

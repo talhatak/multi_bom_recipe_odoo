@@ -8,11 +8,14 @@ class MasterRecipe(models.Model):
     _description = 'Master Recipe'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'name, id'
+    _check_company_auto = True
 
     name = fields.Char(required=True)
     product_id = fields.Many2one(
         'product.template',
         string='Product',
+        check_company=True,
+        domain=[('type', '=', 'consu')],
         required=True,
     )
     company_id = fields.Many2one(
@@ -21,8 +24,13 @@ class MasterRecipe(models.Model):
         required=True,
         default=lambda self: self.env.company,
     )
+    recipe_channel_ids = fields.Many2many(
+        'restaurant.floor', string='Sales Channels',
+        help='Generate a BoM for each selected floor, even without extra channel components.',
+    )
+    bom_ids = fields.One2many('mrp.bom', 'master_recipe_id', string='Generated BoMs', readonly=True)
     sales_channel_ids = fields.One2many(
-        'sales.config.channel',
+        'master.recipe.channel.line',
         'master_recipe_id',
         string='Sales Channels',
     )
@@ -51,7 +59,7 @@ class MasterRecipe(models.Model):
             },
         }
 
-    @api.depends('sales_channel_ids', 'sales_channel_ids.channel_id')
+    @api.depends('bom_ids')
     def _compute_bom_counts(self):
         bom_data = self.env['mrp.bom'].read_group(
             [('master_recipe_id', 'in', self.ids)],
@@ -114,10 +122,10 @@ class MasterRecipe(models.Model):
     def _sync_recipe_boms(self):
         bom_obj = self.env['mrp.bom']
         for recipe in self:
-            existing_boms = bom_obj.sudo().search([
+            existing_boms = bom_obj.with_context(active_test=False).sudo().search([
                 ('master_recipe_id', '=', recipe.id),
             ])
-            active_channels = recipe.sales_channel_ids.mapped('channel_id')
+            active_channels = recipe.recipe_channel_ids | recipe.sales_channel_ids.mapped('channel_id')
             kept_boms = bom_obj.browse()
 
             for channel in active_channels:
@@ -134,12 +142,14 @@ class MasterRecipe(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super(MasterRecipe, self.with_context(skip_master_recipe_sync=True)).create(vals_list)
-        records._sync_recipe_boms()
+        if not self.env.context.get('skip_master_recipe_sync'):
+            records._sync_recipe_boms()
         return records
 
     def write(self, vals):
         res = super(MasterRecipe, self.with_context(skip_master_recipe_sync=True)).write(vals)
-        self._sync_recipe_boms()
+        if not self.env.context.get('skip_master_recipe_sync'):
+            self._sync_recipe_boms()
         return res
 
     def unlink(self):

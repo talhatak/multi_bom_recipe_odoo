@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="master_recipe_company_rule" model="ir.rule">
+        <field name="name">Master recipes: allowed companies</field>
+        <field name="model_id" ref="model_master_recipe"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="main_component_company_rule" model="ir.rule">
+        <field name="name">Recipe components: allowed companies</field>
+        <field name="model_id" ref="model_main_component"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="recipe_channel_line_company_rule" model="ir.rule">
+        <field name="name">Recipe channel components: allowed companies</field>
+        <field name="model_id" ref="model_master_recipe_channel_line"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
