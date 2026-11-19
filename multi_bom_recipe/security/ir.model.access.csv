@@ -1,3 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_master_recipe_user,master.recipe,model_master_recipe,base.group_user,1,1,1,1
-access_main_component_user,main.component,model_main_component,base.group_user,1,1,1,1
+access_master_recipe_user,master.recipe read,model_master_recipe,base.group_user,1,0,0,0
+access_main_component_user,main.component read,model_main_component,base.group_user,1,0,0,0
+access_recipe_channel_line_user,recipe.channel.line read,model_master_recipe_channel_line,base.group_user,1,0,0,0
+access_master_recipe_mrp_user,master.recipe manage,model_master_recipe,mrp.group_mrp_user,1,1,1,1
+access_main_component_mrp_user,main.component manage,model_main_component,mrp.group_mrp_user,1,1,1,1
+access_recipe_channel_line_mrp_user,recipe.channel.line manage,model_master_recipe_channel_line,mrp.group_mrp_user,1,1,1,1
+access_recipe_floor_sales,recipe floor sales read,pos_restaurant.model_restaurant_floor,sales_team.group_sale_salesman,1,0,0,0
+access_recipe_floor_mrp,recipe floor manufacturing read,pos_restaurant.model_restaurant_floor,mrp.group_mrp_user,1,0,0,0

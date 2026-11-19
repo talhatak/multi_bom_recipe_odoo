@@ -3,6 +3,8 @@ from . import main_component
 from . import master_recipe
 from . import mrp_bom
 from . import procurement_group
-from . import sales_config_channel
+from . import recipe_channel_line
+from . import sale_order
+from . import sale_order_line
 from . import stock_move
 from . import stock_picking

@@ -19,8 +19,9 @@
         <field name="model">mrp.bom</field>
         <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/div[1]" position="after">
-                <field name="sales_channel_id"/>
+            <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="sales_channel_id" readonly="is_master_recipe_bom"/>
+                <field name="is_master_recipe_bom" invisible="True"/>
             </xpath>
         </field>
     </record>
