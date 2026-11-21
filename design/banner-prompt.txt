@@ -1,9 +1,0 @@
-Generated with the built-in image_gen tool.
-
-Use case: ads-marketing.
-Asset type: wide Odoo Apps Store banner for an actual Odoo 18 addon.
-Primary request: Create a polished landscape marketing banner for "Multi BOM Recipe", a restaurant recipe and channel-specific bill-of-materials app by Talha Khan.
-Composition: wide 2:1 banner, ideally 1600x800. All content well within generous safe margins. Strong readable typography on left half, tasteful dimensional food and recipe illustration on right half. Premium restrained SaaS editorial design, clean warm ivory background with deep plum (#714B67 / #632453) and coral accent, subtle lavender panels, no visual clutter.
-Exact text: large heading "Multi BOM Recipe"; subtitle "One recipe. Every sales channel."; small badge "Odoo 18"; small footer "By Talha Khan". On right show a master recipe clipboard with stylized ingredient list and a realistic beautiful 3D illustrated burger, branching with elegant thin lines to three distinct small destination cards labeled exactly "Dine-in", "Delivery", "Pickup". Dine-in icon plate and cutlery; Delivery icon a burger box and bag; Pickup icon wrapped burger. Illustration communicates shared ingredients plus different packaging. Crisp professional typography, premium soft lighting and tactile matte 3D forms, subtle shadows, balanced whitespace, instantly legible at thumbnail size.
-Constraints: no fake application screenshot, no unsupported feature claims, no pricing or certification or Enterprise badges, no copied vendor logos, no watermarks, no URLs, no extra text. Opaque background.
-

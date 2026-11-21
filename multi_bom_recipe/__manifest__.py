@@ -18,7 +18,7 @@
 #############################################################################
 {
     'name': 'Multi BOM Recipe',
-    'version': '18.0.2.1.0',
+    'version': '18.0.2.1.1',
     'category': 'Manufacturing',
     'summary': """Master recipes, channel-specific bills of materials, shared
     ingredients, restaurant POS recipes, and Sales Order recipe selection
