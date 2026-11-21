@@ -1,2 +1,5 @@
 __pycache__/
 *.py[cod]
+
+# Local development worklogs
+[Ww][Oo][Rr][Kk][Ll][Oo][Gg].md
