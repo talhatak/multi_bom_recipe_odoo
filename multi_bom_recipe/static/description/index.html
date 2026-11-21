@@ -1,0 +1,179 @@
+<section class="container py-5" aria-label="Multi BOM Recipe overview">
+    <div class="row align-items-center">
+        <div class="col-lg-8 mb-4">
+            <p class="text-uppercase font-weight-bold mb-3" style="color: #714B67; font-size: 13px;">One recipe. Every sales channel.</p>
+            <h1 class="font-weight-bold mb-3" style="color: #292333; font-size: 42px;">Multi BOM Recipe</h1>
+            <p class="lead mb-4" style="color: #575361;">Manage shared ingredients and channel-specific components from one master recipe. Let each sales channel use its own bill of materials.</p>
+            <span class="badge badge-light border p-2 mr-2 mb-2">Odoo 18</span>
+            <span class="badge badge-light border p-2 mr-2 mb-2">Point of Sale</span>
+            <span class="badge badge-light border p-2 mr-2 mb-2">Sales Orders</span>
+            <span class="badge badge-light border p-2 mb-2">Multi-company</span>
+        </div>
+        <div class="col-lg-4 text-center mb-4">
+            <img src="icon.png" alt="A master recipe branching into three sales channels" width="220" height="220" class="img-fluid rounded"/>
+        </div>
+    </div>
+    <div class="border-top pt-4 mt-3">
+        <div class="row text-center">
+            <div class="col-md-4 mb-3">
+                <p class="h5 font-weight-bold" style="color: #714B67;">One master recipe</p>
+                <p class="text-muted mb-0">Maintain your common ingredients once.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <p class="h5 font-weight-bold" style="color: #714B67;">One BoM per channel</p>
+                <p class="text-muted mb-0">Generate recipes with the right extras.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <p class="h5 font-weight-bold" style="color: #714B67;">Channel-aware fulfillment</p>
+                <p class="text-muted mb-0">Select recipes for POS and Sales Orders.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-4" aria-label="Features">
+    <p class="text-uppercase font-weight-bold mb-2" style="color: #714B67; font-size: 13px;">Built for recipe variations</p>
+    <h2 class="font-weight-bold mb-4" style="color: #292333;">Shared ingredients. Channel-specific details.</h2>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="border rounded p-4 h-100">
+                <p class="font-weight-bold mb-2" style="color: #714B67;">01 / Central recipe management</p>
+                <h3 class="h5 font-weight-bold">One place to maintain recipes</h3>
+                <p class="text-muted mb-0">Choose a product and company, define common ingredients, and add channel-specific extras in the same form.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="border rounded p-4 h-100">
+                <p class="font-weight-bold mb-2" style="color: #714B67;">02 / Generated channel BoMs</p>
+                <h3 class="h5 font-weight-bold">Keep variations in sync</h3>
+                <p class="text-muted mb-0">Saving recipe changes maintains a phantom (kit) BoM for every selected floor. Open generated BoMs from the recipe's smart button.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="border rounded p-4 h-100">
+                <p class="font-weight-bold mb-2" style="color: #714B67;">03 / Restaurant POS</p>
+                <h3 class="h5 font-weight-bold">Use the table's floor</h3>
+                <p class="text-muted mb-0">POS orders select their recipe from the restaurant table's floor, with stock moves consuming that channel's components.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="border rounded p-4 h-100">
+                <p class="font-weight-bold mb-2" style="color: #714B67;">04 / Sales Orders</p>
+                <h3 class="h5 font-weight-bold">Choose the channel on a quotation</h3>
+                <p class="text-muted mb-0">Select a restaurant floor in the Sales Channel field before confirmation. Procurement uses the matching recipe in the order's company.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="border rounded p-4 h-100">
+                <p class="font-weight-bold mb-2" style="color: #714B67;">05 / Component quantities</p>
+                <h3 class="h5 font-weight-bold">Combine ingredients and extras</h3>
+                <p class="text-muted mb-0">Common quantities convert to each product's default unit of measure. Repeated component products merge into one generated BoM line.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="border rounded p-4 h-100">
+                <p class="font-weight-bold mb-2" style="color: #714B67;">06 / Company-specific recipes</p>
+                <h3 class="h5 font-weight-bold">Manage recipes per company</h3>
+                <p class="text-muted mb-0">Recipes and generated BoMs belong to a company. Recipe and component access follows the user's allowed companies.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-4" aria-label="Example channel recipes">
+    <div class="bg-light rounded p-4 p-lg-5">
+        <p class="text-uppercase font-weight-bold mb-2" style="color: #714B67; font-size: 13px;">Example: one burger, three channels</p>
+        <h2 class="font-weight-bold mb-3" style="color: #292333;">Change the packaging, keep the recipe.</h2>
+        <p class="text-muted mb-4">Define the bun, patty, and sauce as common components. Add packaging only where it is needed. The names below represent restaurant floors configured as sales channels.</p>
+        <div class="table-responsive">
+            <table class="table table-bordered bg-white mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Sales channel</th>
+                        <th scope="col">Shared recipe</th>
+                        <th scope="col">Channel extras</th>
+                        <th scope="col">Generated result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><th scope="row">Dine-in</th><td>Bun, patty, sauce</td><td>No extra components</td><td>Dine-in kit BoM</td></tr>
+                    <tr><th scope="row">Delivery</th><td>Bun, patty, sauce</td><td>Burger box and delivery bag</td><td>Delivery kit BoM</td></tr>
+                    <tr><th scope="row">Pickup</th><td>Bun, patty, sauce</td><td>Wrapper and takeaway bag</td><td>Pickup kit BoM</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-muted mt-3 mb-0">Illustrative example. Products, floors, and quantities are configured by your team; sample recipes are not included.</p>
+    </div>
+</section>
+
+<section class="container py-5" aria-label="Setup workflow">
+    <h2 class="font-weight-bold mb-4" style="color: #292333;">From master recipe to order fulfillment</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <p class="h2 font-weight-bold" style="color: #714B67;">1.</p>
+            <h3 class="h5 font-weight-bold">Build the master recipe</h3>
+            <p class="text-muted">Open Point of Sale &gt; Products &gt; Master Recipes. Set the product and company, then add common ingredients with quantities and units of measure.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <p class="h2 font-weight-bold" style="color: #714B67;">2.</p>
+            <h3 class="h5 font-weight-bold">Configure your channels</h3>
+            <p class="text-muted">Select restaurant floors in Sales Channels. Add optional extras in Channel Components, using each component's default unit of measure, and save.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <p class="h2 font-weight-bold" style="color: #714B67;">3.</p>
+            <h3 class="h5 font-weight-bold">Use the matching BoM</h3>
+            <p class="text-muted">POS takes its channel from the table's floor. For Sales Orders, select Sales Channel on the quotation before confirming.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container pb-5" aria-label="Installation and requirements">
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="border rounded p-4 h-100">
+                <h2 class="h4 font-weight-bold mb-3" style="color: #292333;">Installation and access</h2>
+                <ol class="pl-3 mb-0">
+                    <li class="mb-2">Add the module to your Odoo addons path, restart Odoo, and update the Apps list.</li>
+                    <li class="mb-2">Install Multi BOM Recipe and configure restaurant floors in Point of Sale.</li>
+                    <li class="mb-2">Give recipe maintainers Manufacturing access and access to the Point of Sale menu.</li>
+                    <li>Create a recipe and verify the generated BoMs before processing orders.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="border rounded p-4 h-100">
+                <h2 class="h4 font-weight-bold mb-3" style="color: #292333;">Official Odoo dependencies</h2>
+                <p class="text-muted">Built for Odoo 18 using standard Manufacturing, Sales/Manufacturing, Inventory Accounting, Point of Sale, Restaurant, Units of Measure, and Discuss modules.</p>
+                <p class="text-muted mb-0">No external connector or third-party addon is required. Sales and Manufacturing users receive read access to the restaurant-floor selector.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container pb-5" aria-label="Frequently asked questions">
+    <h2 class="font-weight-bold mb-4" style="color: #292333;">Good to know</h2>
+    <div class="border-top py-3">
+        <h3 class="h5 font-weight-bold">Does every channel need extra components?</h3>
+        <p class="text-muted mb-0">No. Select a floor in the recipe's Sales Channels field to generate a BoM containing only the shared ingredients. A floor used on a Channel Components line also gets a generated BoM.</p>
+    </div>
+    <div class="border-top py-3">
+        <h3 class="h5 font-weight-bold">What happens without a matching channel recipe?</h3>
+        <p class="text-muted mb-0">Odoo falls back to an ordinary non-channel BoM if one exists. If none exists, standard processing continues without a kit BoM. Another channel's generated recipe is never used as a default.</p>
+    </div>
+    <div class="border-top py-3">
+        <h3 class="h5 font-weight-bold">Can the Sales Order channel change after confirmation?</h3>
+        <p class="text-muted mb-0">The channel is locked after confirmation. Cancel and reset the order to draft before changing it. Existing completed stock operations are not rewritten.</p>
+    </div>
+    <div class="border-top py-3">
+        <h3 class="h5 font-weight-bold">Where should generated BoMs be edited?</h3>
+        <p class="text-muted mb-0">Maintain ingredients on the master recipe. Saving recipe changes replaces generated BoM lines, so review outstanding stock operations before changing recipes already in use.</p>
+    </div>
+    <div class="border-top py-3">
+        <h3 class="h5 font-weight-bold">Does it include accounting support?</h3>
+        <p class="text-muted mb-0">The module includes a POS invoice cost-of-goods-sold calculation based on completed component moves and their stock valuation layers, for eligible Anglo-Saxon accounting flows. Your product valuation and accounting configuration still apply.</p>
+    </div>
+    <div class="border-top pt-4 mt-3 text-center">
+        <p class="font-weight-bold mb-1" style="color: #714B67;">Multi BOM Recipe &middot; Odoo 18 &middot; LGPL-3</p>
+        <p class="text-muted mb-0">By Talha Khan &mdash; Odoo Developer &amp; Technical Consultant</p>
+    </div>
+</section>
