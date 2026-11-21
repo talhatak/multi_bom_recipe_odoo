@@ -15,7 +15,7 @@ class MasterRecipe(models.Model):
         'product.template',
         string='Product',
         check_company=True,
-        domain=[('type', '=', 'consu')],
+        domain=[('type', 'in', ['product', 'consu'])],
         required=True,
     )
     company_id = fields.Many2one(
@@ -50,7 +50,7 @@ class MasterRecipe(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Bills of Materials',
             'res_model': 'mrp.bom',
-            'view_mode': 'list,form',
+            'view_mode': 'tree,form',
             'domain': [('master_recipe_id', '=', self.id)],
             'context': {
                 'default_master_recipe_id': self.id,

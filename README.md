@@ -1,6 +1,6 @@
 # Multi BOM Recipe
 
-An Odoo 18 addon for managing sales-channel-specific recipes from one master recipe view. Sales channels are standard Odoo restaurant floors.
+An Odoo 17 addon for managing sales-channel-specific recipes from one master recipe view. Sales channels are standard Odoo restaurant floors.
 
 ## Features
 
@@ -24,7 +24,7 @@ Only official Odoo addons are required: `mrp`, `sale_mrp`, `stock_account`, `poi
 
 ## Recipe setup
 
-Open **Point of Sale > Products > Master Recipes** with a user who has Manufacturing access.
+Open **Point of Sale > Configuration > Products > Master Recipes** with a user who has Manufacturing access.
 
 1. Set the recipe name, sellable product, and company.
 2. Select the restaurant floors in **Sales Channels**.
@@ -62,7 +62,7 @@ Generated BoMs are maintained by the recipe; edit ingredient definitions in the 
 
 ## Validation
 
-On a clean Odoo 18 database, install using only the dependencies above. Check shared ingredients, per-channel extras, duplicate components and UoM conversion; POS orders on different floors (including session closing and refunds); Sales Orders with different floors, quantity increases, delivery quantities and returns; unmatched-floor fallback; multi-company isolation; and POS invoice component valuation/COGS.
+On a clean Odoo 17 database, install using only the dependencies above. Check shared ingredients, per-channel extras, duplicate components and UoM conversion; POS orders on different floors (including session closing and refunds); Sales Orders with different floors, quantity increases, delivery quantities and returns; unmatched-floor fallback; multi-company isolation; and POS invoice component valuation/COGS.
 
 ## License
 
