@@ -80,6 +80,60 @@
     </div>
 </section>
 
+<section class="container py-5" aria-label="Screenshots and product walkthrough">
+    <div class="text-center mb-5">
+        <p class="text-uppercase font-weight-bold mb-2" style="color: #714B67; font-size: 13px; letter-spacing: 2px;">See it in Odoo</p>
+        <h2 class="font-weight-bold mb-3" style="color: #292333; font-size: 34px;">One burger. Three channels. The right components.</h2>
+        <p class="text-muted mx-auto" style="max-width: 760px; font-size: 17px;">Follow a sample recipe through the actual Odoo 18 screens: define the ingredients, add packaging, and inspect the channel-specific bills of materials.</p>
+        <p class="text-muted small">Screenshots use demonstration records created in a staging database. Sample products and recipes are not included with the module.</p>
+    </div>
+
+    <div class="mb-5">
+        <div class="rounded p-4 mb-3" style="background-color: #F5F0F4; border-left: 4px solid #714B67;">
+            <p class="font-weight-bold mb-2" style="color: #714B67;">01 / Build your shared recipe</p>
+            <h3 class="h4 font-weight-bold" style="color: #292333;">Maintain the ingredients once</h3>
+            <p class="mb-0" style="color: #575361;">Select Dine-in, Delivery, and Pickup, then enter the bun, beef patty, and sauce under Main Components. The BoMs smart button gives you direct access to the three generated recipes.</p>
+        </div>
+        <img src="screenshot_master_recipe.png" alt="Odoo 18 master recipe for Classic Beef Burger showing three sales channels, shared ingredient quantities, and the three-BoMs smart button" class="img-fluid d-block border rounded" width="1440" height="820" style="width: 100%; height: auto;"/>
+    </div>
+
+    <div class="mb-5">
+        <div class="rounded p-4 mb-3" style="background-color: #F5F0F4; border-left: 4px solid #714B67;">
+            <p class="font-weight-bold mb-2" style="color: #714B67;">02 / Add only the extras each channel needs</p>
+            <h3 class="h4 font-weight-bold" style="color: #292333;">Packaging belongs to the channel</h3>
+            <p class="mb-0" style="color: #575361;">Delivery adds a burger box and delivery bag. Pickup adds a wrapper. Dine-in needs no extra line: its selected channel still receives a BoM with the shared ingredients.</p>
+        </div>
+        <img src="screenshot_channel_components.png" alt="Channel Components tab showing a burger box and bag for Delivery and a burger wrapper for Pickup" class="img-fluid d-block border rounded" width="1440" height="820" style="width: 100%; height: auto;"/>
+    </div>
+
+    <div class="mb-5">
+        <div class="rounded p-4 mb-3" style="background-color: #F5F0F4; border-left: 4px solid #714B67;">
+            <p class="font-weight-bold mb-2" style="color: #714B67;">03 / Review the generated variations</p>
+            <h3 class="h4 font-weight-bold" style="color: #292333;">Three channels, three kit BoMs</h3>
+            <p class="mb-0" style="color: #575361;">Open the recipe's BoMs smart button to see its Dine-in, Delivery, and Pickup bills of materials together, with the sales channel visible on each row.</p>
+        </div>
+        <img src="screenshot_generated_boms.png" alt="Bills of Materials list with three automatically generated Classic Beef Burger kit BoMs for Dine-in, Delivery, and Pickup" class="img-fluid d-block border rounded" width="1440" height="380" style="width: 100%; height: auto;"/>
+    </div>
+
+    <div class="mb-5">
+        <div class="rounded p-4 mb-3" style="background-color: #F5F0F4; border-left: 4px solid #714B67;">
+            <p class="font-weight-bold mb-2" style="color: #714B67;">04 / Inspect the complete channel recipe</p>
+            <h3 class="h4 font-weight-bold" style="color: #292333;">Shared ingredients and delivery packaging, together</h3>
+            <p class="mb-0" style="color: #575361;">The Delivery kit BoM contains the bun, patty, and sauce plus its box and bag. Maintain these definitions on the master recipe; saving recipe changes updates the generated BoMs.</p>
+        </div>
+        <img src="screenshot_delivery_bom.png" alt="Delivery kit BoM containing the shared burger ingredients plus a Burger Box and Delivery Bag" class="img-fluid d-block border rounded" width="1440" height="820" style="width: 100%; height: auto;"/>
+    </div>
+
+    <div>
+        <div class="rounded p-4 mb-3" style="background-color: #F5F0F4; border-left: 4px solid #714B67;">
+            <p class="font-weight-bold mb-2" style="color: #714B67;">05 / Choose the channel before confirmation</p>
+            <h3 class="h4 font-weight-bold" style="color: #292333;">Carry the recipe choice into Sales</h3>
+            <p class="mb-0" style="color: #575361;">Select Delivery in the quotation's Sales Channel field. When the order is confirmed, procurement uses the matching channel recipe. Restaurant POS gets its channel from the order's table floor.</p>
+        </div>
+        <img src="screenshot_sales_channel.png" alt="Odoo Sales quotation for ten Classic Beef Burgers with Delivery selected in the Sales Channel field" class="img-fluid d-block border rounded" width="1440" height="820" style="width: 100%; height: auto;"/>
+    </div>
+</section>
+
 <section class="container py-4" aria-label="Example channel recipes">
     <div class="bg-light rounded p-4 p-lg-5">
         <p class="text-uppercase font-weight-bold mb-2" style="color: #714B67; font-size: 13px;">Example: one burger, three channels</p>
@@ -98,7 +152,7 @@
                 <tbody>
                     <tr><th scope="row">Dine-in</th><td>Bun, patty, sauce</td><td>No extra components</td><td>Dine-in kit BoM</td></tr>
                     <tr><th scope="row">Delivery</th><td>Bun, patty, sauce</td><td>Burger box and delivery bag</td><td>Delivery kit BoM</td></tr>
-                    <tr><th scope="row">Pickup</th><td>Bun, patty, sauce</td><td>Wrapper and takeaway bag</td><td>Pickup kit BoM</td></tr>
+                    <tr><th scope="row">Pickup</th><td>Bun, patty, sauce</td><td>Burger wrapper</td><td>Pickup kit BoM</td></tr>
                 </tbody>
             </table>
         </div>
