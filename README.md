@@ -1,6 +1,6 @@
 # Multi BOM Recipe
 
-An Odoo 18 addon for managing sales-channel-specific recipes from one master recipe view. Sales channels are standard Odoo restaurant floors.
+An Odoo 19 addon for managing sales-channel-specific recipes from one master recipe view. Sales channels are standard Odoo restaurant floors.
 
 ## Features
 
@@ -10,7 +10,7 @@ An Odoo 18 addon for managing sales-channel-specific recipes from one master rec
 - Merge duplicate component products and convert common-component quantities to the product's default unit of measure.
 - Open generated BoMs from the recipe's smart button.
 - Select the correct recipe from the POS table floor or the Sales Order's **Sales Channel** field.
-- Retain POS invoice COGS calculation based on completed component stock moves.
+- Calculate POS invoice COGS from completed component stock move values using Odoo 19 inventory accounting.
 
 ## Dependencies
 
@@ -48,6 +48,8 @@ The channel cannot change after confirmation. Cancel and reset the order to draf
 
 If no channel is selected, or no matching generated BoM exists, an ordinary non-channel BoM is used. Generated channel BoMs never become an arbitrary fallback for another channel. Floors are matched by record ID, so duplicate floor names cannot select the wrong recipe.
 
+Common-component units must share a reference unit with the product unit. Odoo 19 uses reference-unit relationships instead of UoM categories.
+
 ## Models and implementation
 
 - `master.recipe`: product, company, selected floors, common components, and channel components.
@@ -62,7 +64,7 @@ Generated BoMs are maintained by the recipe; edit ingredient definitions in the 
 
 ## Validation
 
-On a clean Odoo 18 database, install using only the dependencies above. Check shared ingredients, per-channel extras, duplicate components and UoM conversion; POS orders on different floors (including session closing and refunds); Sales Orders with different floors, quantity increases, delivery quantities and returns; unmatched-floor fallback; multi-company isolation; and POS invoice component valuation/COGS.
+On a clean Odoo 19 database, install using only the dependencies above. Check shared ingredients, per-channel extras, duplicate components and UoM conversion; POS orders on different floors (including session closing and refunds); Sales Orders with different floors, quantity increases, delivery quantities and returns; unmatched-floor fallback; multi-company isolation; and POS invoice component move valuation/COGS.
 
 ## License
 

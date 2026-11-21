@@ -9,9 +9,10 @@ class StockMove(models.Model):
         for move in self:
             channel_id = False
             if not move.bom_line_id:
-                pos_order = move.picking_id.pos_order_id or move.group_id.pos_order_id
-                if pos_order:
-                    channel_id = pos_order.table_id.floor_id.id
+                pos_orders = move.picking_id.pos_order_id or move.reference_ids.pos_order_ids
+                if pos_orders:
+                    floors = pos_orders.table_id.floor_id
+                    channel_id = floors.id if len(floors) == 1 else False
                 elif move.sale_line_id:
                     channel_id = move.sale_line_id.order_id.sales_channel_id.id
             by_channel.setdefault(channel_id, self.env['stock.move'])

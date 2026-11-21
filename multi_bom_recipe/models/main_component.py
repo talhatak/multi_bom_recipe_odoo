@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class MainComponent(models.Model):
@@ -24,20 +25,37 @@ class MainComponent(models.Model):
     product_qty = fields.Float(
         string='Quantity',
         default=1.0,
+        digits='Product Unit',
         required=True,
     )
     product_uom_id = fields.Many2one(
         'uom.uom',
         string='Unit of Measure',
-        domain="[('category_id', '=', product_uom_category_id)]",
+        domain="[('id', 'in', allowed_uom_ids)]",
         required=True,
     )
 
-    product_uom_category_id = fields.Many2one(related='product_id.uom_id.category_id')
+    allowed_uom_ids = fields.Many2many('uom.uom', compute='_compute_allowed_uom_ids')
 
-    _sql_constraints = [
-        ('positive_quantity', 'CHECK(product_qty >= 0)', 'Component quantities cannot be negative.'),
-    ]
+    _positive_quantity = models.Constraint(
+        'CHECK(product_qty >= 0)', 'Component quantities cannot be negative.',
+    )
+
+    @api.depends('product_id', 'product_id.uom_id')
+    def _compute_allowed_uom_ids(self):
+        for line in self:
+            unit = line.product_id.uom_id
+            if unit:
+                reference_id = int(unit.parent_path.split('/')[0])
+                line.allowed_uom_ids = self.env['uom.uom'].search([('id', 'child_of', reference_id)])
+            else:
+                line.allowed_uom_ids = self.env['uom.uom']
+
+    @api.constrains('product_id', 'product_uom_id')
+    def _check_component_uom(self):
+        for line in self:
+            if line.product_id and line.product_uom_id and not line.product_uom_id._has_common_reference(line.product_id.uom_id):
+                raise ValidationError(_('The component unit must share a reference unit with the product unit.'))
 
     @api.onchange('product_id')
     def _onchange_product_id(self):
@@ -52,7 +70,7 @@ class MainComponent(models.Model):
         records = super(MainComponent, self.with_context(skip_master_recipe_sync=True)).create(vals_list)
         if not self.env.context.get('skip_master_recipe_sync'):
             records.mapped('master_recipe_id')._sync_recipe_boms()
-        return records
+        return records.with_env(self.env)
 
     def write(self, vals):
         recipes = self.mapped('master_recipe_id')

@@ -1,5 +1,4 @@
 from odoo import models
-from odoo.tools import float_is_zero
 
 
 class AccountMoveLine(models.Model):
@@ -7,55 +6,39 @@ class AccountMoveLine(models.Model):
 
     def _get_pos_picking_moves_for_cogs(self):
         self.ensure_one()
-        if not self.move_id.pos_order_ids:
-            return self.env['stock.move']
-
-        pickings = self.move_id.pos_order_ids.sudo().mapped('picking_ids').filtered(
-            lambda p: p.state == 'done'
-        )
+        pickings = self.move_id.sudo().pos_order_ids.picking_ids.filtered(lambda picking: picking.state == 'done')
         if self.move_id.move_type == 'out_refund':
-            return pickings.mapped('move_ids').filtered(
-                lambda m: m.state == 'done' and m.location_id.usage == 'customer'
-            )
-        return pickings.mapped('move_ids').filtered(
-            lambda m: m.state == 'done' and m.location_dest_id.usage == 'customer'
-        )
+            return pickings.move_ids.filtered(lambda move: move.state == 'done' and move.location_id.usage == 'customer')
+        return pickings.move_ids.filtered(lambda move: move.state == 'done' and move.location_dest_id.usage == 'customer')
 
-    def _get_pos_cogs_price_unit(self):
+    def _get_pos_recipe_cogs_value(self):
+        """Return component cost per sold product's default unit, or None for standard costing."""
         self.ensure_one()
-        if not self.move_id.pos_order_ids or not self.product_id or float_is_zero(
-            self.quantity, precision_rounding=self.product_uom_id.rounding
-        ):
-            return False
-
+        if not self.move_id.sudo().pos_order_ids or not self.product_id or self.product_uom_id.is_zero(self.quantity):
+            return None
         moves = self._get_pos_picking_moves_for_cogs()
-        if not moves:
-            return False
-
-        relevant_moves = moves.filtered(
-            lambda m: m.product_id == self.product_id
-            or (
-                m.bom_line_id
-                and m.bom_line_id.bom_id
-                and m.bom_line_id.bom_id.product_tmpl_id == self.product_id.product_tmpl_id
-            )
+        recipe_moves = moves.filtered(
+            lambda move: move.bom_line_id.bom_id.is_master_recipe_bom
+            and move.bom_line_id.bom_id.product_tmpl_id == self.product_id.product_tmpl_id
         )
-        if not relevant_moves:
-            return False
-
-        valuation_total = abs(sum(relevant_moves.stock_valuation_layer_ids.mapped('value')))
-        if not valuation_total:
-            return False
-
-        quantity = abs(self.quantity)
-        if float_is_zero(quantity, precision_rounding=self.product_uom_id.rounding):
-            return False
-
+        if not recipe_moves:
+            return None
+        relevant_moves = recipe_moves | moves.filtered(lambda move: move.product_id == self.product_id)
+        # Odoo 19 stores valuation on stock.move.value instead of valuation layers.
+        valuation_total = abs(sum(relevant_moves.mapped('value')))
+        # Share the cost across repeated invoice lines instead of charging it on each line.
+        lines = self.move_id.invoice_line_ids.filtered(
+            lambda line: line.product_id == self.product_id and line.quantity * self.quantity > 0
+        )
+        quantity = sum(abs(line.product_uom_id._compute_quantity(
+            line.quantity, self.product_id.uom_id, round=False,
+        )) for line in lines)
+        if self.product_id.uom_id.is_zero(quantity):
+            return None
         return valuation_total / quantity
 
-    def _stock_account_get_anglo_saxon_price_unit(self):
-        self.ensure_one()
-        pos_price_unit = self._get_pos_cogs_price_unit()
-        if pos_price_unit:
-            return pos_price_unit
-        return super()._stock_account_get_anglo_saxon_price_unit()
+    def _get_cogs_value(self):
+        value = self._get_pos_recipe_cogs_value()
+        if value is not None:
+            return value
+        return super()._get_cogs_value()

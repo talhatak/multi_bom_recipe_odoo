@@ -2,7 +2,7 @@ from . import account_move_line
 from . import main_component
 from . import master_recipe
 from . import mrp_bom
-from . import procurement_group
+from . import stock_rule
 from . import recipe_channel_line
 from . import sale_order
 from . import sale_order_line

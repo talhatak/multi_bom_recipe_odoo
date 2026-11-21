@@ -14,19 +14,19 @@ class MasterRecipeChannelLine(models.Model):
     company_id = fields.Many2one(related='master_recipe_id.company_id', store=True, index=True)
     channel_id = fields.Many2one('restaurant.floor', string='Sales Channel', required=True, ondelete='restrict')
     product_id = fields.Many2one('product.product', string='Component', required=True, check_company=True)
-    product_qty = fields.Float(string='Quantity', default=1.0, required=True, digits='Product Unit of Measure')
+    product_qty = fields.Float(string='Quantity', default=1.0, required=True, digits='Product Unit')
     product_uom_id = fields.Many2one(related='product_id.uom_id', string='Unit of Measure', readonly=True)
 
-    _sql_constraints = [
-        ('positive_quantity', 'CHECK(product_qty >= 0)', 'Component quantities cannot be negative.'),
-    ]
+    _positive_quantity = models.Constraint(
+        'CHECK(product_qty >= 0)', 'Component quantities cannot be negative.',
+    )
 
     @api.model_create_multi
     def create(self, vals_list):
         records = super(MasterRecipeChannelLine, self.with_context(skip_master_recipe_sync=True)).create(vals_list)
         if not self.env.context.get('skip_master_recipe_sync'):
             records.mapped('master_recipe_id')._sync_recipe_boms()
-        return records
+        return records.with_env(self.env)
 
     def write(self, vals):
         recipes = self.mapped('master_recipe_id')

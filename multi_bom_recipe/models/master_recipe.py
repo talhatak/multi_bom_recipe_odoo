@@ -61,15 +61,12 @@ class MasterRecipe(models.Model):
 
     @api.depends('bom_ids')
     def _compute_bom_counts(self):
-        bom_data = self.env['mrp.bom'].read_group(
+        bom_data = self.env['mrp.bom']._read_group(
             [('master_recipe_id', 'in', self.ids)],
             ['master_recipe_id'],
-            ['master_recipe_id'],
+            ['__count'],
         )
-        counts = {
-            record['master_recipe_id'][0]: record['master_recipe_id_count']
-            for record in bom_data if record.get('master_recipe_id')
-        }
+        counts = {recipe.id: count for recipe, count in bom_data}
         for recipe in self:
             recipe.bom_counts = counts.get(recipe.id, 0)
 
@@ -144,7 +141,7 @@ class MasterRecipe(models.Model):
         records = super(MasterRecipe, self.with_context(skip_master_recipe_sync=True)).create(vals_list)
         if not self.env.context.get('skip_master_recipe_sync'):
             records._sync_recipe_boms()
-        return records
+        return records.with_env(self.env)
 
     def write(self, vals):
         res = super(MasterRecipe, self.with_context(skip_master_recipe_sync=True)).write(vals)

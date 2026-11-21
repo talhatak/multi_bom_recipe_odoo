@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class MrpBom(models.Model):
@@ -22,9 +22,7 @@ class MrpBom(models.Model):
             products, picking_type=picking_type, company_id=company_id, bom_type=bom_type,
         )
         # Channel recipes are selected explicitly, never as a default for another channel.
-        return expression.AND([domain, [
-            ('is_master_recipe_bom', '=', False), ('sales_channel_id', '=', False),
-        ]])
+        return domain & Domain('is_master_recipe_bom', '=', False) & Domain('sales_channel_id', '=', False)
 
     @api.model
     def _bom_find(self, products, picking_type=None, company_id=False, bom_type=False):
@@ -42,11 +40,11 @@ class MrpBom(models.Model):
         domain = super()._bom_find_domain(
             products, picking_type=picking_type, company_id=company_id, bom_type='phantom',
         )
-        domain = expression.AND([domain, [
+        domain &= Domain([
             ('is_master_recipe_bom', '=', True),
             ('sales_channel_id', '=', channel_id),
             ('company_id', '=', company_id or self.env.context.get('company_id') or self.env.company.id),
-        ]])
+        ])
         by_template = {}
         for bom in self.search(domain, order='sequence, id'):
             by_template.setdefault(bom.product_tmpl_id.id, bom)

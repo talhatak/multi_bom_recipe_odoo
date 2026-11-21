@@ -4,8 +4,8 @@ from odoo import api, models
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    def _prepare_procurement_values(self, group_id=False):
-        values = super()._prepare_procurement_values(group_id=group_id)
+    def _prepare_procurement_values(self):
+        values = super()._prepare_procurement_values()
         values['recipe_sales_channel_id'] = self.order_id.sales_channel_id.id
         return values
 

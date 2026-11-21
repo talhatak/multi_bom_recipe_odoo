@@ -18,12 +18,12 @@
 #############################################################################
 {
     'name': 'Multi BOM Recipe',
-    'version': '18.0.2.1.1',
+    'version': '19.0.2.1.1',
     'category': 'Manufacturing',
     'summary': """Master recipes, channel-specific bills of materials, shared
     ingredients, restaurant POS recipes, and Sales Order recipe selection
-    for Odoo 18""",
-    'description': """Multi BOM Recipe for Odoo 18
+    for Odoo 19""",
+    'description': """Multi BOM Recipe for Odoo 19
     Manage shared ingredients and channel-specific components from one master
     recipe. Automatically generate and maintain a kit bill of materials for
     each selected restaurant floor used as a sales channel.
@@ -57,7 +57,7 @@
         'views/sale_order_views.xml',
     ],
     'license': 'LGPL-3',
-    'images': ['static/description/banner.png'],
+    'images': ['static/description/banner-19.png'],
     'installable': True,
     'auto_install': False,
     'application': True,
