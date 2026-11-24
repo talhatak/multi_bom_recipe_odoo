@@ -12,6 +12,10 @@ An Odoo 19 addon for managing sales-channel-specific recipes from one master rec
 - Select the correct recipe from the POS table floor or the Sales Order's **Sales Channel** field.
 - Calculate POS invoice COGS from completed component stock move values using Odoo 19 inventory accounting.
 
+## Compatibility
+
+Compatible with Odoo 19 **Community** and **Enterprise** editions. Both editions require the standard dependencies listed below.
+
 ## Dependencies
 
 Only official Odoo addons are required: `mrp`, `sale_mrp`, `stock_account`, `point_of_sale`, `pos_restaurant`, `uom`, and `mail`.
@@ -65,6 +69,10 @@ Generated BoMs are maintained by the recipe; edit ingredient definitions in the 
 ## Validation
 
 On a clean Odoo 19 database, install using only the dependencies above. Check shared ingredients, per-channel extras, duplicate components and UoM conversion; POS orders on different floors (including session closing and refunds); Sales Orders with different floors, quantity increases, delivery quantities and returns; unmatched-floor fallback; multi-company isolation; and POS invoice component move valuation/COGS.
+
+## Support
+
+For help with installation, recipe configuration, or issues, contact Talha Khan at [talhatak50@gmail.com](mailto:talhatak50@gmail.com). Include your Odoo version, edition, and relevant screenshots or error messages.
 
 ## License
 
